@@ -1,13 +1,13 @@
-This is a reminder to make a class that operates on the beginning of an idea. Think about it. When you want to start an idea using c++, typically it is to generate things: objects, algorithms, data formats; and it is to save and track those things in an organzied fashion. For example, I want to build software that will lead someone into executing a technical testing and debugging of a circuit board. I want to track the power systems, probing each step along the way. Start with the first level of power. Test all that you can before you alter the system by power other domains. This is all about power domains.
-Anyways.
-Make a Git-Doped Machine Maker
+This is not the only way to use this tool, it is simply an example.
 
-What to do when I start a project:
-specify the language
-specify the project name
-git init
-git all the other stuff to make a thing
-commit a README with the name of the project in the file, and maybe a template for an intro README
-generate the first objects of the project: input as many to start as you can
--this includes .cc files with basic mehtods, .h files with a basic setup, and a makefile; this is a specific example for the c++ language. other versions of this can exist for any language.
+Instructions:
+1. Establish a user bin
+	 $ mkdir $HOME/bin
+2. Move script into bin
+3. Add the following line at the end of $HOME/.bashrc
+	 $ export PATH=$"HOME/bin:$PATH"
 
+Example Usage:
+$ git_begin project_name object0 object1
+
+After git_begin, the next string will be the name of the project, and every string after that will be objects named after the strings themselves
