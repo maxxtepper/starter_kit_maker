@@ -1,0 +1,7 @@
+Eventually, I want to bin repeatable actions in the git_begin of any language.
+
+git_begin_python
+git_begin_cpp
+
+These will both be scripts symlinked into $HOME/bin
+Any script that they share will exist in this bin
