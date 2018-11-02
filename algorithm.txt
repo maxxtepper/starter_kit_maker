@@ -1,0 +1,13 @@
+touch README
+touch .gitignore
+git init
+git add .
+git commit -m "First commit of ${1}"
+git remote add origin git@github.com/${2}/${1}.git
+git push -u origin master
+
+
+
+
+${1} = name of project
+${2} = github user
