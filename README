@@ -5,7 +5,7 @@ Instructions:
 	 $ mkdir $HOME/bin
 2. Move script into bin
 3. Add the following line at the end of $HOME/.bashrc
-	 $ export PATH=$"HOME/bin:$PATH"
+	 $ export PATH="$HOME/bin:$PATH"
 
 Example Usage:
 $ git_begin project_name object0 object1

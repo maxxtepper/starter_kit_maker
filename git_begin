@@ -80,7 +80,14 @@ $item::~$item() {
 	fi
 done
 
-#	Add main to makefile
+#	main
+touch main.cc
+echo "#include <iostream>
+
+int main(int argc, char* argv[]) {
+	return 0;
+}" >> main.cc
+
 sed -i "/^OBJFILES/ s/$/main.o /" Makefile
 
 # Make first commit
