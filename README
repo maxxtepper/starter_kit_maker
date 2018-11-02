@@ -3,8 +3,8 @@ This is not the only way to use this tool, it is simply an example.
 Instructions:
 1. Establish a user bin
 	 $ mkdir $HOME/bin
-2. Move script into bin
-	 $ mv git_begin $HOME/bin
+2. Create symlink of file in bin
+	 $ ln -s git_begin $HOME/bin/.
 3. Add the following line at the end of $HOME/.bashrc
 	 export PATH="$HOME/bin:$PATH"
 
@@ -12,3 +12,5 @@ Example Usage:
 $ git_begin project_name object0 object1
 
 After git_begin, the next string will be the name of the project, and every string after that will be objects named after the strings themselves
+
+Symlink allows you to edit the git_begin file in the repo to keep the executable up-to-date
