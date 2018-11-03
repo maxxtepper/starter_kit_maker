@@ -1,0 +1,36 @@
+#!/bin/bash
+# $1 = Project Name
+
+# Get variables
+OBJECT=$1
+
+# Which directory?
+# This one for now
+
+# Create object files
+# Header
+touch $OBJECT.h
+echo "#ifndef $OBJECT.H
+#define $OBJECT.H
+
+class $OBJECT {
+public:
+	$OBJECT();
+	~$OBJECT();
+
+private:
+};
+
+#endif" >> $OBJECT.h
+
+# Source
+touch $OBJECT.cc
+echo "#include \"$OBJECT.h\"
+$OBJECT::$OBJECT() {
+}
+
+$OBJECT::~$OBJECT() {
+}" >> $OBJECT.cc
+
+#	Add object to makefile
+sed -i "/^OBJFILES/ s/$/$OBJECT.o /" Makefile
