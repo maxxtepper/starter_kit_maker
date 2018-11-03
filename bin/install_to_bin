@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Assume the bin exists
+# Base directory
+item=$1
+PWD=`pwd`
+
+#ln -s ./$item $BASE/bin
+chmod +x $PWD/$item
+ln -s $PWD/$item $HOME/bin
+

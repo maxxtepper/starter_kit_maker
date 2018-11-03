@@ -12,11 +12,7 @@ cd $PROJECT
 # Create beginning files
 # README
 touch README
-echo "This is the README for $PROJECT
-Template_v0:
-Name:
-Number:
-Hi:" >> README
+echo "This is the README for $PROJECT" >> README
 
 # .gitignore
 touch .gitignore
@@ -41,37 +37,13 @@ all: \$(TARGET)
 clean:
 	rm -f \$(OBJFILES) \$(TARGET) *~" >> Makefile
 
-# Create object files
+# Create Objects
+PWD=`pwd`
 COUNT=0
-for item in "$@"; do
+for object in "$@"; do
 	if [ $COUNT -ne 0 ]; then
-		# Header
-		touch $item.h
-		echo "#ifndef $item.H
-#define $item.H
-
-class $item {
-	public:
-		$item();
-		~$item();
-
-	private:
-};
-
-#endif" >> $item.h
-
-		# Source
-		touch $item.cc
-		echo "#include \"$item.h\"
-$item::$item() {
-}
-
-$item::~$item() {
-}" >> $item.cc
-
-		#	Add object to makefile
-		sed -i "/^OBJFILES/ s/$/$item.o /" Makefile
-
+		# Make Object: item
+		$HOME/bin/object_maker $object
 		# Increase Count
 		let COUNT=COUNT+1
 	else	
