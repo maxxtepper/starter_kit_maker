@@ -1,3 +1,8 @@
 #!/bin/bash
 
+TYPE=$1
+VAR=$2
 
+$TYPE $VAR;
+
+$TYPE $OBJECT::$VAR() {

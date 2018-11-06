@@ -14,11 +14,11 @@ echo "#ifndef $OBJECT.H
 #define $OBJECT.H
 
 class $OBJECT {
-public:
-	$OBJECT();
-	~$OBJECT();
+	public:
+		$OBJECT();
+		~$OBJECT();
 
-private:
+	private:
 };
 
 #endif" >> $OBJECT.h
