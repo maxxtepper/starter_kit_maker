@@ -40,9 +40,34 @@ clean:
 # Create Objects
 PWD=`pwd`
 COUNT=0
-for object in "$@"; do
+for object in "$OBJECT"; do
 	if [ $COUNT -ne 0 ]; then
 		# Make Object: item
+		touch $@.h
+		echo "#ifndef $@.H
+		#define $@.H
+
+		class $@ {
+			public:
+				$@();
+				~$@();
+
+			private:
+		};
+
+		#endif" >> $@.h
+
+		# Source
+		touch $@.cc
+		echo "#include \"$@.h\"
+		$@::$@() {
+		}
+
+		$@::~$@() {
+		}" >> $@.cc
+
+		#	Add object to makefile
+		sed -i "/^OBJFILES/ s/$/$@.o /" Makefile
 		$HOME/bin/object_maker $object
 		# Increase Count
 		let COUNT=COUNT+1
