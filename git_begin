@@ -12,11 +12,7 @@ cd $PROJECT
 # Create beginning files
 # README
 touch README
-echo "This is the README for $PROJECT
-Template_v0:
-Name:
-Number:
-Hi:" >> README
+echo "This is the README for $PROJECT" >> README
 
 # .gitignore
 touch .gitignore
@@ -92,7 +88,18 @@ sed -i "/^OBJFILES/ s/$/main.o /" Makefile
 
 # Make first commit
 git init
+echo "Project initialized..."
+vim README
+echo "README updated..."
 git add .
-git commit -m "First commit of $PROJECT"
-git remote add origin git@github.com/$USER/$PROJECT.git
-
+git commit -m "First commit of $PROJECT: Check README"
+git branch -m master develop
+echo "develop branch created (HEAD)..."
+git branch release
+echo "release branch created..."
+echo "First commit is set. Ready to push the develop branch..."
+echo "Go to https://github.com/new and make a new repo with the project name: $PROJECT"
+read -p "Press enter once done"
+git remote add origin https://github.com/$USER/$PROJECT.git
+git push origin develop
+echo "Develop branch successfuly pushed. Release branch is ready for merge when a releaseable version of develop is ready! Happy Building!!"
