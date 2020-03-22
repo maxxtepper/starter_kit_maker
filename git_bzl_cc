@@ -4,7 +4,7 @@
 # Get variables
 USER=$(git config --global user.name)
 PROJECT=$1
-TEMP_SOURCE="$PWD/bin/bazel/cpp-temp"
+TEMP_SOURCE="$HOME/bin/bazel/cpp-temp"
 
 # Create and enter git directory
 mkdir $PROJECT 
