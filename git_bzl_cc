@@ -4,7 +4,7 @@
 # Get variables
 USER=$(git config --global user.name)
 PROJECT=$1
-TEMP_SOURCE="$HOME/bin/bazel/cpp-temp"
+TEMP_SOURCE="$HOME/bin/starter_kit_maker/bin/bazel/cc-temp"
 
 # Create and enter git directory
 mkdir $PROJECT 
@@ -38,8 +38,8 @@ for item in "$@"; do
 	if [ $COUNT -ne 0 ]; then
 		# Header
 		touch src/lib/$item.h
-		echo "#ifndef $item.H
-#define $item.H
+		echo "#ifndef ${item}_H
+#define ${item}_H
 
 class $item {
 	public:

@@ -6,6 +6,7 @@ OBJECT=$1
 
 # Which directory?
 # This one for now
+# MUST be in the directory where the files are going
 
 # Create object files
 # Header
@@ -32,6 +33,3 @@ $OBJECT::$OBJECT() {
 
 $OBJECT::~$OBJECT() {
 }" >> $OBJECT.cc
-
-#	Add object to makefile
-sed -i "/^OBJFILES/ s/$/$OBJECT.o /" Makefile
