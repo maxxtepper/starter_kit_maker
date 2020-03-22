@@ -4,45 +4,64 @@
 # Get variables
 USER=$(git config --global user.name)
 PROJECT=$1
+TEMP_SOURCE="$PWD/bin/bazel/cpp-template"
 
 # Create and enter git directory
 mkdir $PROJECT 
 cd $PROJECT
 
-# Create beginning files
 # README
 touch README
 echo "This is the README for $PROJECT" >> README
 
-# .gitignore
-touch .gitignore
-echo "main
-*.swp
-*.swo
-*.o" >> .gitignore
+# Create dir tree
+mkdir src
+mkdir src/lib
+mkdir src/main
+mkdir tests
 
-# Makefile
-touch Makefile
-echo "CC = g++
-CFLAGS = -Wall
-LDFLAGS = 
-OBJFILES = 
-TARGET = main
+#	Create WORKSPACE
+touch WORKSPACE
+cat "$TEMP_SOURCE/WORKSPACE" > WORKSPACE
 
-all: \$(TARGET)
+#	Create BUILDS
+touch src/lib/BUILD
+cat "$TEMP_SOURCE/src/lib/BUILD" > src/lib/BUILD
+touch src/main/BUILD
+cat "$TEMP_SOURCE/src/main/BUILD" > src/main/BUILD
+touch tests/BUILD
+cat "$TEMP_SOURCE/tests/BUILD" > tests/BUILD
 
-\$(TARGET): \$(OBJFILES)
-	\$(CC) \$(CFLAGS) -o \$(TARGET) \$(OBJFILES) \$(LDFLAGS)
-
-clean:
-	rm -f \$(OBJFILES) \$(TARGET) *~" >> Makefile
-
-# Create Objects
-PWD=`pwd`
+# Create object files
 COUNT=0
-for object in "$@"; do
+for item in "$@"; do
 	if [ $COUNT -ne 0 ]; then
-		object_maker $object
+		# Header
+		touch src/lib/$item.h
+		echo "#ifndef $item.H
+#define $item.H
+
+class $item {
+	public:
+		$item();
+		~$item();
+
+	private:
+};
+
+#endif" >> src/lib/$item.h
+
+		# Source
+		touch src/lib/$item.cc
+		echo "#include \"$item.h\"
+$item::$item() {
+}
+
+$item::~$item() {
+}" >> src/lib/$item.cc
+
+		# Increase Count
+		let COUNT=COUNT+1
 	else	
 		# Skip first item (project name)
 		let COUNT=COUNT+1
@@ -50,14 +69,12 @@ for object in "$@"; do
 done
 
 #	main
-touch main.cc
+touch src/main/main.cc
 echo "#include <iostream>
 
-int main(int argc, char* argv[]) {
+int main(int argc, char** argv) {
 	return 0;
-}" >> main.cc
-
-sed -i "/^OBJFILES/ s/$/main.o /" Makefile
+}" >> src/main/main.cc
 
 # Make first commit
 git init
@@ -65,10 +82,6 @@ echo "Project initialized..."
 vim README
 echo "README updated..."
 git add .
-<<<<<<< HEAD
-git commit -m "First commit of $PROJECT"
-#git remote add origin https://github.com/$USER/$PROJECT.git
-=======
 git commit -m "First commit of $PROJECT: Check README"
 git branch -m master develop
 echo "develop branch created (HEAD)..."
@@ -80,4 +93,3 @@ read -p "Press enter once done"
 git remote add origin https://github.com/$USER/$PROJECT.git
 git push origin develop
 echo "Develop branch successfuly pushed. Release branch is ready for merge when a releaseable version of develop is ready! Happy Building!!"
->>>>>>> 6218677e29466891c4a07853dc69808df7b0231a
