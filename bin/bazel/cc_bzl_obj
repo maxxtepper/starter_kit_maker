@@ -11,8 +11,9 @@ OBJECT=$1
 # Create object files
 # Header
 touch $OBJECT.h
-echo "#ifndef ${OBJECT}_H
-#define ${OBJECT}_H
+HEADER=${PROJECT^^}"_SRC_LIB_"${OBJECT^^}"_H_"
+echo "#ifndef $HEADER
+#define $HEADER
 
 class $OBJECT {
 	public:

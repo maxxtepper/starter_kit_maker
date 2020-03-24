@@ -4,14 +4,18 @@ This is not the only way to use this tool, it is simply an example.
 
 Instructions:
 1. Establish a user bin up to the following:
-	 $ mkdir -p $HOME/bin/starter_kit_maker/bin/bazel
-2. Add the following line at the end of $HOME/.bashrc
-	 export PATH="$HOME/bin:$PATH"
-3. Create symlink of files in bin
-	 $ ln -s /full-path/git_begin $HOME/bin/.
-	 $ ln -s /full-path/bin/object_maker $HOME/bin/.
-	 $ ln -s /full-path/git_bzl_cc $HOME/bin/.
-	 $ ln -s /full-path/bin/bazel/cc_bzl_obj $HOME/bin/.
+	$ mkdir -p $HOME/bin/starter_kit_maker/bin/bazel
+2. Install packages
+	$ sudo apt install direnv bazel
+	*go to bazel getting started and follow instructions
+3. Add the following lines at the end of $HOME/.bashrc (if using a different shell, direnv line will be different. Google direnv setup)
+	export PATH="$HOME/bin:$PATH"
+	eval "$(direnv hook bash)"
+4. Create symlink of files in bin
+	$ ln -s /full-path/git_begin $HOME/bin/.
+	$ ln -s /full-path/bin/object_maker $HOME/bin/.
+	$ ln -s /full-path/git_bzl_cc $HOME/bin/.
+	$ ln -s /full-path/bin/bazel/cc_bzl_obj $HOME/bin/.
 
 Example Usage (no bazel):
 $ git_begin project_name object0 object1

@@ -10,6 +10,10 @@ TEMP_SOURCE="$HOME/bin/starter_kit_maker/bin/bazel/cc-temp"
 mkdir $PROJECT 
 cd $PROJECT
 
+#	Direnv setup
+echo "export PROJECT=${PROJECT}" >> .envrc
+direnv allow .
+
 # README
 touch README
 echo "This is the README for $PROJECT" >> README
