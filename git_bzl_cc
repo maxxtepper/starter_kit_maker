@@ -22,7 +22,8 @@ mkdir tests
 
 #	Create WORKSPACE
 touch WORKSPACE
-cat "$TEMP_SOURCE/WORKSPACE" > WORKSPACE
+echo "# $PROJECT" > WORKSPACE
+cat "$TEMP_SOURCE/WORKSPACE" >> WORKSPACE
 
 #	Create BUILDS
 touch src/lib/BUILD
@@ -38,8 +39,9 @@ for item in "$@"; do
 	if [ $COUNT -ne 0 ]; then
 		# Header
 		touch src/lib/$item.h
-		echo "#ifndef ${item}_H
-#define ${item}_H
+		HEADER=${PROJECT^^}"_SRC_LIB_"${item^^}"_H_"
+		echo "#ifndef $HEADER
+#define $HEADER
 
 class $item {
 	public:
