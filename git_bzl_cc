@@ -99,14 +99,21 @@ int main(int argc, char** argv) {
 # Make first commit
 git init
 echo "Project initialized..."
+#	README
 vim README
 echo "README updated..."
+#	.gitignore
+touch .gitignore
+echo "bazel*" >> .gitignore
+#	Add and commit
 git add .
 git commit -m "First commit of $PROJECT: Check README"
+#	Branch setup
 git branch -m master develop
 echo "develop branch created (HEAD)..."
 git branch release
 echo "release branch created..."
+#	Remote and push
 echo "First commit is set. Ready to push the develop branch..."
 echo "Go to https://github.com/new and make a new repo with the project name: $PROJECT"
 read -p "Press enter once done"
