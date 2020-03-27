@@ -69,7 +69,8 @@ $item::~$item() {
 
 		# Test
 		touch tests/${item}_test.cc
-		echo "#include \"gtest/gtest.h\"
+		echo "#include <memory>
+#include \"gtest/gtest.h\"
 #include \"src/lib/$item.h\"
 
 TEST(${item}Should, ReturnSomething){

@@ -37,7 +37,8 @@ $OBJECT::~$OBJECT() {
 
 # Test
 touch ${PROJPWD}/tests/${OBJECT}_test.cc
-echo "#include \"gtest/gtest.h\"
+echo "#include <memory>
+#include \"gtest/gtest.h\"
 #include \"src/lib/$OBJECT.h\"
 
 TEST(${OBJECT}Should, ReturnSomething){
