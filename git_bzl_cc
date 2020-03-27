@@ -12,6 +12,7 @@ cd $PROJECT
 
 #	Direnv setup
 echo "export PROJECT=${PROJECT}" >> .envrc
+echo "export PROJPWD=${PWD}" >> .envrc
 direnv allow .
 
 # README
@@ -37,7 +38,7 @@ cat "$TEMP_SOURCE/src/main/BUILD" > src/main/BUILD
 touch tests/BUILD
 cat "$TEMP_SOURCE/tests/BUILD" > tests/BUILD
 
-# Create object files
+# Create object instance
 COUNT=0
 for item in "$@"; do
 	if [ $COUNT -ne 0 ]; then
@@ -65,6 +66,18 @@ $item::$item() {
 
 $item::~$item() {
 }" >> src/lib/$item.cc
+
+		# Test
+		touch tests/${item}_test.cc
+		echo "#include \"gtest/gtest.h\"
+#include \"src/lib/$item.h\"
+
+TEST(${item}Should, ReturnSomething){
+	std::unique_ptr<$item> ${item,,} = std::make_unique<$item>();
+	std::string actual = ${item,,}->DoSomething();
+	std::string expected = "Something";
+	EXPECT_EQ(expected, actual);
+}" >> tests/${item}_test.cc
 
 		# Increase Count
 		let COUNT=COUNT+1
