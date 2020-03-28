@@ -42,8 +42,10 @@ echo "#include <memory>
 #include \"src/lib/$OBJECT.h\"
 
 TEST(${OBJECT}Should, ReturnSomething){
+/*
 	std::unique_ptr<$OBJECT> ${OBJECT,,} = std::make_unique<$OBJECT>();
 	std::string actual = ${OBJECT,,}->DoSomething();
 	std::string expected = "Something";
 	EXPECT_EQ(expected, actual);
+*/
 }" >> ${PROJPWD}/tests/${OBJECT}_test.cc

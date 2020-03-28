@@ -74,10 +74,12 @@ $item::~$item() {
 #include \"src/lib/$item.h\"
 
 TEST(${item}Should, ReturnSomething){
+/*
 	std::unique_ptr<$item> ${item,,} = std::make_unique<$item>();
 	std::string actual = ${item,,}->DoSomething();
 	std::string expected = "Something";
 	EXPECT_EQ(expected, actual);
+*/
 }" >> tests/${item}_test.cc
 
 		# Increase Count
