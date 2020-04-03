@@ -1,8 +1,8 @@
 #!/bin/bash
-# $1 = Project Name
 
 # Get variables
 OBJECT=$1
+VARS=".vars"
 
 # Which directory?
 # This one for now
@@ -49,3 +49,6 @@ TEST(${OBJECT}Should, ReturnSomething){
 	EXPECT_EQ(expected, actual);
 */
 }" >> ${PROJPWD}/tests/${OBJECT}_test.cc
+
+#	Object vars
+echo "$OBJECT" >> $VARS

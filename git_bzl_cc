@@ -5,6 +5,7 @@
 USER=$(git config --global user.name)
 PROJECT=$1
 TEMP_SOURCE="$HOME/bin/starter_kit_maker/bin/bazel/cc-temp"
+VARS=".vars"
 
 # Create and enter git directory
 mkdir $PROJECT 
@@ -37,6 +38,9 @@ touch src/main/BUILD
 cat "$TEMP_SOURCE/src/main/BUILD" > src/main/BUILD
 touch tests/BUILD
 cat "$TEMP_SOURCE/tests/BUILD" > tests/BUILD
+
+#	Create vars hidden file
+touch .vars
 
 # Create object instance
 COUNT=0
@@ -81,6 +85,9 @@ TEST(${item}Should, ReturnSomething){
 	EXPECT_EQ(expected, actual);
 */
 }" >> tests/${item}_test.cc
+
+		#	Object vars
+		echo "$item" >> $VARS
 
 		# Increase Count
 		let COUNT=COUNT+1

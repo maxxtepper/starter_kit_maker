@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Get variables
+OBJECT=$1
+VARS=".vars"
+
+#	Go into VARS, find the input
+#	And change all instances of
+# the input, in all files, and in all directories.
