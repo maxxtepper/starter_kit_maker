@@ -19,6 +19,10 @@ Instructions:
 	$ ln -s /full-path/bin/object_maker $HOME/bin/.
 	$ ln -s /full-path/git_bzl_cc $HOME/bin/.
 	$ ln -s /full-path/bin/bazel/cc_bzl_obj $HOME/bin/.
+6. Create $HOME/.bazelrc
+	$ Add the following:
+		build --cxxopt='-std=c++17'
+		test --cxxopt='-std=c++17' --test_output=all
 
 Example Usage (no bazel):
 $ git_begin project_name object0 object1
