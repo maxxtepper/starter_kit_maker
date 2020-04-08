@@ -11,7 +11,10 @@ Instructions:
 	*go to bazel getting started and follow instructions
 	$ sudo apt install bazel
 	$ echo "export PATH=\"\$HOME/bin:\$PATH\"" >> $HOME/.bashrc
-4. Create symlink of files in bin
+4. Git clone the repo
+	$ git clone https://github.com/maxxtepper/starter_kit_maker.git
+	$ cd starter_kit_maker
+5. Create symlink of files in bin
 	$ ln -s /full-path/git_begin $HOME/bin/.
 	$ ln -s /full-path/bin/object_maker $HOME/bin/.
 	$ ln -s /full-path/git_bzl_cc $HOME/bin/.
