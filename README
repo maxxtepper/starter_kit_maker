@@ -1,16 +1,16 @@
+Starter Kit Maker
 Created By: maxxtepper
-
-This is not the only way to use this tool, it is simply an example.
 
 Instructions:
 1. Establish a user bin up to the following:
 	$ mkdir -p $HOME/bin/starter_kit_maker/bin/bazel
-2. Install packages
-	$ sudo apt install direnv bazel
+2. Install direnv
+	$ sudo apt install direnv
+	$ echo "eval \"\$(direnv hook bash)\"" >> $HOME/.bashrc
+3. Install bazel
 	*go to bazel getting started and follow instructions
-3. Add the following lines at the end of $HOME/.bashrc (if using a different shell, direnv line will be different. Google direnv setup)
-	export PATH="$HOME/bin:$PATH"
-	eval "$(direnv hook bash)"
+	$ sudo apt install bazel
+	$ echo "export PATH=\"\$HOME/bin:\$PATH\"" >> $HOME/.bashrc
 4. Create symlink of files in bin
 	$ ln -s /full-path/git_begin $HOME/bin/.
 	$ ln -s /full-path/bin/object_maker $HOME/bin/.
