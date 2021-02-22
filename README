@@ -1,18 +1,35 @@
+Starter Kit Maker
 Created By: maxxtepper
 
-This is not the only way to use this tool, it is simply an example.
-
 Instructions:
-1. Establish a user bin
-	 $ mkdir $HOME/bin
-2. Create symlink of file in bin
-	 $ ln -s /full-path/git_begin $HOME/bin/.
-3. Add the following line at the end of $HOME/.bashrc
-	 export PATH="$HOME/bin:$PATH"
+1. Establish a user bin up to the following:
+	$ mkdir -p $HOME/bin/starter_kit_maker/bin/bazel
+2. Install direnv
+	$ sudo apt install direnv
+	$ echo "eval \"\$(direnv hook bash)\"" >> $HOME/.bashrc
+3. Install bazel
+	*go to bazel getting started and follow instructions
+	$ sudo apt install bazel
+	$ echo "export PATH=\"\$HOME/bin:\$PATH\"" >> $HOME/.bashrc
+4. Git clone the repo
+	$ git clone https://github.com/maxxtepper/starter_kit_maker.git
+	$ cd starter_kit_maker
+5. Create symlink of files in bin
+	$ ln -s /full-path/git_begin $HOME/bin/.
+	$ ln -s /full-path/bin/object_maker $HOME/bin/.
+	$ ln -s /full-path/git_bzl_cc $HOME/bin/.
+	$ ln -s /full-path/bin/bazel/cc_bzl_obj $HOME/bin/.
+6. Create $HOME/.bazelrc
+	$ Add the following:
+		build --cxxopt='-std=c++17'
+		test --cxxopt='-std=c++17' --test_output=all
 
-Example Usage:
+Example Usage (no bazel):
 $ git_begin project_name object0 object1
+
+Example Usage (with bazel):
+$ git_bzl_cc project_name object0 object1
 
 After git_begin, the next string will be the name of the project, and every string after that will be objects named after the strings themselves
 
-Symlink allows you to edit the git_begin file in the repo to keep the executable up-to-date
+Symlink allows you to edit the scripts in the repo to keep the executable up-to-date

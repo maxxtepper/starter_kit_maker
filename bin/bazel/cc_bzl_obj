@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Get variables
+OBJECT=$1
+VARS=".vars"
+
+# Which directory?
+# This one for now
+# MUST be in the directory where the files are going
+
+# Create object files
+# Header
+touch $OBJECT.h
+HEADER=${PROJECT^^}"_SRC_LIB_"${OBJECT^^}"_H_"
+echo "#ifndef $HEADER
+#define $HEADER
+
+class $OBJECT {
+	public:
+		$OBJECT();
+		~$OBJECT();
+
+	private:
+};
+
+#endif" >> $OBJECT.h
+
+# Source
+touch $OBJECT.cc
+echo "#include \"$OBJECT.h\"
+
+$OBJECT::$OBJECT() {
+}
+
+$OBJECT::~$OBJECT() {
+}" >> $OBJECT.cc
+
+# Test
+touch ${PROJPWD}/tests/${OBJECT}_test.cc
+echo "#include <memory>
+#include \"gtest/gtest.h\"
+#include \"src/lib/$OBJECT.h\"
+
+TEST(${OBJECT}Should, ReturnSomething){
+/*
+	std::unique_ptr<$OBJECT> ${OBJECT,,} = std::make_unique<$OBJECT>();
+	std::string actual = ${OBJECT,,}->DoSomething();
+	std::string expected = "Something";
+	EXPECT_EQ(expected, actual);
+*/
+}" >> ${PROJPWD}/tests/${OBJECT}_test.cc
+
+#	Object vars
+echo "$OBJECT" >> $VARS

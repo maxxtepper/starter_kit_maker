@@ -10,8 +10,8 @@ OBJECT=$1
 # Create object files
 # Header
 touch $OBJECT.h
-echo "#ifndef $OBJECT.H
-#define $OBJECT.H
+echo "#ifndef ${OBJECT}_H
+#define ${OBJECT}_H
 
 class $OBJECT {
 	public:
@@ -26,6 +26,7 @@ class $OBJECT {
 # Source
 touch $OBJECT.cc
 echo "#include \"$OBJECT.h\"
+
 $OBJECT::$OBJECT() {
 }
 

@@ -40,37 +40,9 @@ clean:
 # Create Objects
 PWD=`pwd`
 COUNT=0
-for object in "$OBJECT"; do
+for object in "$@"; do
 	if [ $COUNT -ne 0 ]; then
-		# Make Object: item
-		touch $@.h
-		echo "#ifndef $@.H
-		#define $@.H
-
-		class $@ {
-			public:
-				$@();
-				~$@();
-
-			private:
-		};
-
-		#endif" >> $@.h
-
-		# Source
-		touch $@.cc
-		echo "#include \"$@.h\"
-		$@::$@() {
-		}
-
-		$@::~$@() {
-		}" >> $@.cc
-
-		#	Add object to makefile
-		sed -i "/^OBJFILES/ s/$/$@.o /" Makefile
-		$HOME/bin/object_maker $object
-		# Increase Count
-		let COUNT=COUNT+1
+		object_maker $object
 	else	
 		# Skip first item (project name)
 		let COUNT=COUNT+1
@@ -89,6 +61,23 @@ sed -i "/^OBJFILES/ s/$/main.o /" Makefile
 
 # Make first commit
 git init
+echo "Project initialized..."
+vim README
+echo "README updated..."
 git add .
+<<<<<<< HEAD
 git commit -m "First commit of $PROJECT"
 #git remote add origin https://github.com/$USER/$PROJECT.git
+=======
+git commit -m "First commit of $PROJECT: Check README"
+git branch -m master develop
+echo "develop branch created (HEAD)..."
+git branch release
+echo "release branch created..."
+echo "First commit is set. Ready to push the develop branch..."
+echo "Go to https://github.com/new and make a new repo with the project name: $PROJECT"
+read -p "Press enter once done"
+git remote add origin https://github.com/$USER/$PROJECT.git
+git push origin develop
+echo "Develop branch successfuly pushed. Release branch is ready for merge when a releaseable version of develop is ready! Happy Building!!"
+>>>>>>> 6218677e29466891c4a07853dc69808df7b0231a

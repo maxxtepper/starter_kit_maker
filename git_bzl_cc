@@ -1,0 +1,131 @@
+#!/bin/bash
+# $1 = Project Name
+
+# Get variables
+USER=$(git config --global user.name)
+PROJECT=$1
+TEMP_SOURCE="$HOME/bin/starter_kit_maker/bin/bazel/cc-temp"
+VARS=".vars"
+
+# Create and enter git directory
+mkdir $PROJECT 
+cd $PROJECT
+
+#	Direnv setup
+echo "export PROJECT=${PROJECT}" >> .envrc
+echo "export PROJPWD=${PWD}" >> .envrc
+direnv allow .
+
+# README
+touch README
+echo "This is the README for $PROJECT" >> README
+
+# Create dir tree
+mkdir src
+mkdir src/lib
+mkdir src/main
+mkdir tests
+
+#	Create WORKSPACE
+touch WORKSPACE
+echo "# $PROJECT" > WORKSPACE
+cat "$TEMP_SOURCE/WORKSPACE" >> WORKSPACE
+
+#	Create BUILDS
+touch src/lib/BUILD
+cat "$TEMP_SOURCE/src/lib/BUILD" > src/lib/BUILD
+touch src/main/BUILD
+cat "$TEMP_SOURCE/src/main/BUILD" > src/main/BUILD
+touch tests/BUILD
+cat "$TEMP_SOURCE/tests/BUILD" > tests/BUILD
+
+#	Create vars hidden file
+touch .vars
+
+# Create object instance
+COUNT=0
+for item in "$@"; do
+	if [ $COUNT -ne 0 ]; then
+		# Header
+		touch src/lib/$item.h
+		HEADER=${PROJECT^^}"_SRC_LIB_"${item^^}"_H_"
+		echo "#ifndef $HEADER
+#define $HEADER
+
+class $item {
+	public:
+		$item();
+		~$item();
+
+	private:
+};
+
+#endif" >> src/lib/$item.h
+
+		# Source
+		touch src/lib/$item.cc
+		echo "#include \"$item.h\"
+$item::$item() {
+}
+
+$item::~$item() {
+}" >> src/lib/$item.cc
+
+		# Test
+		touch tests/${item}_test.cc
+		echo "#include <memory>
+#include \"gtest/gtest.h\"
+#include \"src/lib/$item.h\"
+
+TEST(${item}Should, ReturnSomething){
+/*
+	std::unique_ptr<$item> ${item,,} = std::make_unique<$item>();
+	std::string actual = ${item,,}->DoSomething();
+	std::string expected = "Something";
+	EXPECT_EQ(expected, actual);
+*/
+}" >> tests/${item}_test.cc
+
+		#	Object vars
+		echo "$item" >> $VARS
+
+		# Increase Count
+		let COUNT=COUNT+1
+	else	
+		# Skip first item (project name)
+		let COUNT=COUNT+1
+	fi
+done
+
+#	main
+touch src/main/main.cc
+echo "#include <iostream>
+
+int main(int argc, char** argv) {
+	return 0;
+}" >> src/main/main.cc
+
+# Make first commit
+git init
+echo "Project initialized..."
+#	README
+vim README
+echo "README updated..."
+#	.gitignore
+touch .gitignore
+echo "bazel*" >> .gitignore
+#	Add and commit
+git add .
+git commit -m "First commit of $PROJECT: Check README"
+#	Branch setup
+git branch -m master develop
+echo "develop branch created (HEAD)..."
+git branch release
+echo "release branch created..."
+#	Remote and push
+echo "First commit is set. Ready to push the develop branch..."
+echo "Go to https://github.com/new and make a new repo with the project name: $PROJECT"
+read -p "Press enter once done"
+git remote add origin https://github.com/$USER/$PROJECT.git
+git push origin develop
+echo "Develop branch successfuly pushed. Release branch is ready for merge when a releaseable version of develop is ready! Happy Building!!"
