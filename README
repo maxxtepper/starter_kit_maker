@@ -2,24 +2,26 @@ Starter Kit Maker
 Created By: maxxtepper
 
 Instructions:
-1. Establish a user bin up to the following:
-	$ mkdir -p $HOME/bin/starter_kit_maker/bin/bazel
-2. Install direnv
+1. Install direnv
 	$ sudo apt install direnv
 	$ echo "eval \"\$(direnv hook bash)\"" >> $HOME/.bashrc
-3. Install bazel
+2. Install bazel
 	*go to bazel getting started and follow instructions
 	$ sudo apt install bazel
 	$ echo "export PATH=\"\$HOME/bin:\$PATH\"" >> $HOME/.bashrc
-4. Git clone the repo
+3. Git clone the repo
 	$ git clone https://github.com/maxxtepper/starter_kit_maker.git
 	$ cd starter_kit_maker
-5. Create symlink of files in bin
+4. Establish a user bin up to the following:
+	$ mkdir -p $HOME/bin/starter_kit_maker/bin/bazel/cc-temp
+5. Install the contents of the local repo cc-temp into the user bin cc-temp
+	$ cp -r ./bin/bazel/cc_temp/* $HOME/bin/starter_kit_maker/bin/bazel/cc-temp
+6. Create symlink of scripts in bin
 	$ ln -s /full-path/git_begin $HOME/bin/.
 	$ ln -s /full-path/bin/object_maker $HOME/bin/.
 	$ ln -s /full-path/git_bzl_cc $HOME/bin/.
 	$ ln -s /full-path/bin/bazel/cc_bzl_obj $HOME/bin/.
-6. Create $HOME/.bazelrc
+7. Create $HOME/.bazelrc
 	$ Add the following:
 		build --cxxopt='-std=c++17'
 		test --cxxopt='-std=c++17' --test_output=all
@@ -32,4 +34,5 @@ $ git_bzl_cc project_name object0 object1
 
 After git_begin, the next string will be the name of the project, and every string after that will be objects named after the strings themselves
 
-Symlink allows you to edit the scripts in the repo to keep the executable up-to-date
+*Symlink allows you to edit/update the scripts in the repo while keeping the executable pointing to it
+*Template files in local bin can be edited as needed

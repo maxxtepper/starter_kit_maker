@@ -5,9 +5,12 @@
 USER=$(git config --global user.name)
 PROJECT=$1
 TEMP_SOURCE="$HOME/bin/starter_kit_maker/bin/bazel/cc-temp"
-VARS=".vars"
 
 # Create and enter git directory
+if [ -d "$PROJECT" ]; then
+	echo "${PROJECT} directory already exists in this directory. Go to a different directory."
+	exit N
+fi
 mkdir $PROJECT 
 cd $PROJECT
 
@@ -38,9 +41,6 @@ touch src/main/BUILD
 cat "$TEMP_SOURCE/src/main/BUILD" > src/main/BUILD
 touch tests/BUILD
 cat "$TEMP_SOURCE/tests/BUILD" > tests/BUILD
-
-#	Create vars hidden file
-touch .vars
 
 # Create object instance
 COUNT=0
